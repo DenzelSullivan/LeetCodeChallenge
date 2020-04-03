@@ -8,28 +8,26 @@
  **/
 
 fun main() {
-    val example1 = listOf(2,2,1).toIntArray()
-    val example2 = listOf(4,1,2,1,2).toIntArray()
+    val example1 = listOf(2, 2, 1).toIntArray()
+    val example2 = listOf(4, 1, 2, 1, 2).toIntArray()
 
-    val s1 = Solution().singleNumber(example1)
-    val s2 = Solution().singleNumber(example2)
+    val s1 = singleNumber(example1)
+    val s2 = singleNumber(example2)
 
     println("Solutions: $s1 $s2")
 }
 
-class Solution {
-    fun singleNumber(nums: IntArray): Int {
-        val list = mutableListOf<Int>()
-        nums.forEach {
-            if(list.contains(it)){
-                list.remove(it)
-            } else {
-                list.add(it)
-            }
+private fun singleNumber(nums: IntArray): Int {
+    val list = mutableListOf<Int>()
+    nums.forEach {
+        if (list.contains(it)) {
+            list.remove(it)
+        } else {
+            list.add(it)
         }
-
-        println("size: ${list.size}, value: ${list[0]}")
-
-        return list[0]
     }
+
+    println("size: ${list.size}, value: ${list[0]}")
+
+    return list[0]
 }
