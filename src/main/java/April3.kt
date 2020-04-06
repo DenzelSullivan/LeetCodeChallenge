@@ -37,7 +37,7 @@ fun maxSubArray(nums: IntArray): Int {
 }
 
 
-// Brute Force - O(n)
+// Brute Force - O(n^2)
 /*fun maxSubArray1(nums: IntArray): Int {
     var max = nums[0]
     val size = nums.size
