@@ -25,8 +25,20 @@ fun main() {
     println(groupAnagrams(arrayOf("paw","dad","bog","day","day","mig","len","rat")))
 }
 
-//TODO : works but has to long of a runtime. Will review and resubmit
 fun groupAnagrams(strs: Array<String>): List<List<String>> {
+    if (strs.isEmpty()) return emptyList()
+    val wordMap: MutableMap<String, MutableList<String>> = mutableMapOf()
+    for (s in strs) {
+        val charArray = s.toCharArray().sorted()
+        val key = charArray.toString()
+        if (!wordMap.containsKey(key)) wordMap[key] = arrayListOf()
+        wordMap[key]?.add(s)
+    }
+    return wordMap.values.toList()
+}
+
+// Works but has to long of a runtime.
+/*fun groupAnagrams(strs: Array<String>): List<List<String>> {
     val anagramList = mutableListOf<List<String>>()
     val removedStrings = mutableListOf<String>()
 
@@ -46,4 +58,4 @@ fun groupAnagrams(strs: Array<String>): List<List<String>> {
     }
 
     return anagramList
-}
+}*/
