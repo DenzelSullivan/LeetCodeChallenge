@@ -1,3 +1,5 @@
+import kotlin.math.max
+
 /**
  *
  * Diameter of Binary Tree
@@ -30,54 +32,24 @@ fun main() {
     println(diameterOfBinaryTree(root))
 }
 
+var total = 0
+
 fun diameterOfBinaryTree(root: TreeNode?): Int {
-    return visit(root!!)
+    total = 1
+    visit(root)
+    return total - 1
 }
 
-// Todo: Not complete. Currently find value from root to lowest node.
-//  Need longest route between any two nodes
 fun visit(node: TreeNode?): Int{
-//    if (node == null) return 0
-
-    val value = node?.`val` // for printing
-    val left = node?.left
-    val right = node?.right
-
-//    println("${node.`val`}: $node")
-
-    val leftSum = if (left != null) visit(left) + 1 else 0
-    println("$value: leftSum = $leftSum")
-
-    val rightSum = if (right != null) visit(right) + 1 else 0
-    println("$value: rightSum = $rightSum")
-
-    println("$value: done")
-
-    return if(leftSum > rightSum) leftSum else rightSum
-}
-
-/*fun visit(node: TreeNode?, total: Int): Int {
     if (node == null) return 0
 
-    println("${node.`val`}: $node")
+    val leftSize = visit(node.left)
+    val rightSize = visit(node.right)
 
-    return if(visit(node.left, total) > visit(node.right, total)){
-        visit(node.left, total) + total
-    } else {
-        visit(node.right, total) + total
-    }
-}*/
+    total = max(total, leftSize + rightSize + 1)
+    return max(leftSize, rightSize) + 1
+}
 
-/**
- * Example:
- * var ti = TreeNode(5)
- * var v = ti.`val`
- * Definition for a binary tree node.
- * class TreeNode(var `val`: Int) {
- *     var left: TreeNode? = null
- *     var right: TreeNode? = null
- * }
- */
 class TreeNode(var `val`: Int) {
     var left: TreeNode? = null
     var right: TreeNode? = null
