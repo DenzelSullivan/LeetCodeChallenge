@@ -13,12 +13,31 @@
  * Note: Please solve it without division and in O(n).
  * */
 
-fun main(){
-    println(productExceptSelf(intArrayOf(1,2,3,4)).toList())
+fun main() {
+    println(productExceptSelf(intArrayOf(1, 2, 3, 4)).toList())
 }
 
+fun productExceptSelf(nums: IntArray): IntArray {
+    val length = nums.size
+    val products = IntArray(length)
+    products[0] = 1
 
+    // getting products to the left of nums[i]
+    for (i in 1 until length) {
+        products[i] = nums[i - 1] * products[i - 1]
+    }
+
+    // getting products to the right of nums[i] and getting final product
+    var right = 1
+    for (i in length - 1 downTo 0){
+        products[i] = products[i] * right
+        right *= nums[i]
+    }
+
+    return products
+}
 // O(n^2) solution.
+/*
 fun productExceptSelf(nums: IntArray): IntArray {
     val products = mutableListOf<Int>()
     for ((index1, num1) in nums.withIndex()){
@@ -32,4 +51,4 @@ fun productExceptSelf(nums: IntArray): IntArray {
     }
 
     return products.toIntArray()
-}
+}*/
